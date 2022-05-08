@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2022 a las 04:25:30
+-- Tiempo de generación: 08-05-2022 a las 07:47:24
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -32,7 +32,6 @@ USE `library`;
 CREATE TABLE `author` (
   `id` int(11) NOT NULL,
   `id_book` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `pseudonym` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
   `birthdate` date NOT NULL,
@@ -47,9 +46,33 @@ CREATE TABLE `author` (
 
 CREATE TABLE `book` (
   `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `ISBN` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `book_authors`
+--
+
+CREATE TABLE `book_authors` (
+  `id` int(11) NOT NULL,
+  `id_book` int(11) NOT NULL,
+  `id_author` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `book_categories`
+--
+
+CREATE TABLE `book_categories` (
+  `id` int(11) NOT NULL,
+  `id_book` int(11) NOT NULL,
+  `id_category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -60,8 +83,6 @@ CREATE TABLE `book` (
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `id_book` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `description` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -90,25 +111,36 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `author`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `book_author` (`id_book`),
-  ADD KEY `user_author` (`id_user`);
+  ADD KEY `book_author` (`id_book`);
 
 --
 -- Indices de la tabla `book`
 --
 ALTER TABLE `book`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `book_authors`
+--
+ALTER TABLE `book_authors`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `title` (`title`),
-  ADD KEY `user_book` (`id_user`);
+  ADD KEY `book_authors_author` (`id_author`),
+  ADD KEY `book_authors_book` (`id_book`);
+
+--
+-- Indices de la tabla `book_categories`
+--
+ALTER TABLE `book_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `book_categories_book` (`id_book`),
+  ADD KEY `book_categories_category` (`id_category`);
 
 --
 -- Indices de la tabla `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `book_category` (`id_book`),
-  ADD KEY `user_category` (`id_user`);
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indices de la tabla `user`
@@ -122,6 +154,36 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `author`
+--
+ALTER TABLE `author`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `book`
+--
+ALTER TABLE `book`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `book_authors`
+--
+ALTER TABLE `book_authors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `book_categories`
+--
+ALTER TABLE `book_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
@@ -132,24 +194,18 @@ ALTER TABLE `user`
 --
 
 --
--- Filtros para la tabla `author`
+-- Filtros para la tabla `book_authors`
 --
-ALTER TABLE `author`
-  ADD CONSTRAINT `book_author` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `user_author` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+ALTER TABLE `book_authors`
+  ADD CONSTRAINT `book_authors_author` FOREIGN KEY (`id_author`) REFERENCES `author` (`id`),
+  ADD CONSTRAINT `book_authors_book` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`);
 
 --
--- Filtros para la tabla `book`
+-- Filtros para la tabla `book_categories`
 --
-ALTER TABLE `book`
-  ADD CONSTRAINT `user_book` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
-
---
--- Filtros para la tabla `category`
---
-ALTER TABLE `category`
-  ADD CONSTRAINT `book_category` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `user_category` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+ALTER TABLE `book_categories`
+  ADD CONSTRAINT `book_categories_book` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `book_categories_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
