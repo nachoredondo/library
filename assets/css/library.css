@@ -1,0 +1,25 @@
+/* CSS app */
+
+#image-login {
+    background-image:url(../../assets/img/library.png);";
+    filter:0.95;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #eee; 
+}
+
+#image-book {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+.isbn {
+    font-size: 12px;
+}
+
+.card-book-view {
+    max-width:700px;
+}
