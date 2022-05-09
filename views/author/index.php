@@ -29,6 +29,9 @@ $action = $_REQUEST['action'] ?? '';
                 <div class="row">
                     <div class="col-lg-11 mx-auto">
                         <div class="card p-3 mt-3">
+                                <a href="edit_create.php">
+                                    <input type="button" class="btn btn-primary ml-5 mb-2" value="Crear nuevo autor"/>
+                                </a>
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                 <div class="table-responsive">
                                     <table id="table-author" class="table table-striped compact nowrap" style="min-width:100%">
@@ -70,6 +73,12 @@ $action = $_REQUEST['action'] ?? '';
                 form.submit();
             }
 
+            function control_date(date){
+                if (date=="0000-00-00") {
+                    return "empty";
+                }
+            }
+
             window.addEventListener('load', function () {
                 let table_author = $('#table-author').DataTable({
                     order: [[1, 'asc']],
@@ -99,10 +108,12 @@ $action = $_REQUEST['action'] ?? '';
                         {
                             data: 'birthdate',
                             title: 'Fecha de nacimiento',
+                            searchable: false,
                         },
                         {
                             data: 'death_date',
                             title: 'Fecha de muerte',
+                            searchable: false,
                         },
                     ],
                     ajax: {
@@ -122,9 +133,9 @@ $action = $_REQUEST['action'] ?? '';
                 });
 
                 $('#table-author tbody').on('click', 'button', function () {
-                    let data = table.row($(this).parents('tr')).data();
+                    let data = table_author.row($(this).parents('tr')).data();
                     if (this.classList.contains('edit-btn')) {
-                        make_request('<?php echo APP_ROOT ?>/views/author/edit_create.php', { id: data["id"] });
+                        make_request('<?php echo APP_ROOT ?>views/author/edit_create.php', { id: data["id"] });
                     } else if (this.classList.contains('remove-btn')) {
                         swal({
                             title: "¿Estás seguro de que quieres borrar la opción?",

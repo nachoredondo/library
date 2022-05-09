@@ -18,6 +18,9 @@
 <!-- Plugins JS-->
 <script src="../../assets/jquery/jquery.min.js"></script>
 <script src="../../assets/js/scripts.js"></script>
+<script src="../../assets/js/moment.js"></script>
+<script src="../../assets/js/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" href="../../assets/css/bootstrap-datetimepicker.min.css" />
 <script src="../../assets/sweetalert/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>

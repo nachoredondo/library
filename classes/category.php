@@ -9,6 +9,7 @@ require_once("controller.php");
 
 class Category {
 	private const TABLE = 'category';
+	private const TABLE_BOOK_CATEGORIES = 'book_categories';
 	private $id;
 
 
@@ -36,10 +37,10 @@ class Category {
 	}
 
 
-	public static function update($name, $description) {
+	public static function update($id, $name, $description) {
 		$sql = "UPDATE `".self::TABLE."`
 			SET `name` = '$name',
-				`description` = '$description',
+				`description` = '$description'
 			WHERE `id` = '$id'";
 		$res = self::query($sql);
 
@@ -49,6 +50,11 @@ class Category {
 
 	public static function delete($id) {
 		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_CATEGORIES."`
+			WHERE `id` = '$id'";
+		$res = self::query($sql);
+
+		$sql = "DELETE
 			FROM `".self::TABLE."`
 			WHERE `id` = '$id'";
 		$res = self::query($sql);
@@ -57,7 +63,7 @@ class Category {
 	}
 
 
-	public static function get_category(string $id) : ?Book {
+	public static function get_category(string $id) : ?Category {
 		$sql = "SELECT * 
 			FROM `".self::TABLE."` 
 			WHERE `id` = '$id'";
@@ -89,7 +95,7 @@ class Category {
 	}
 
 
-	public function description(?string $birthdate = "") : ?string {
+	public function description(?string $description) : ?string {
 		if (isset($description)) {
 			$this->description = $description;
 		}

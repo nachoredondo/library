@@ -109,14 +109,14 @@ $action = $_REQUEST['action'] ?? '';
 							<h3 class="row mt-2 ml-1 text-info" id="author-part">2 - Asignar autor/es:</h3>
 							<form>
 								<div class="control-group">
-									 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-									 	<h5 class="text-info mt-3">Listado de autores asignados</h5>
+									<div class="form-group floating-label-form-group controls mb-2 pb-2">
+										<h5 class="text-info mt-3">Listado de autores asignados</h5>
 										<div class="table-responsive">
 											<table id="author-assigned" class="table table-striped compact nowrap" style="min-width:100%">
 												<thead><!-- Leave empty. Column titles are automatically generated --></thead>
 											</table>
 										</div>
-									 	<h5 class="text-info mt-3">Listado de autores sin asignar</h5>
+										<h5 class="text-info mt-3">Listado de autores sin asignar</h5>
 										<div class="table-responsive">
 											<table id="author-not-assigned" class="table table-striped compact nowrap" style="min-width:100%">
 												<thead><!-- Leave empty. Column titles are automatically generated --></thead>
@@ -124,6 +124,9 @@ $action = $_REQUEST['action'] ?? '';
 										</div>
 										<p class="help-block text-danger" style="display:none;"></p>
 									</div>
+									<a href="../author/edit_create.php">
+										<input type="button" class="btn btn-primary ml-5 mb-2" value="Crear nuevo autor"/>
+									</a>
 								</div>
 							</form>
 						</div>
@@ -131,14 +134,14 @@ $action = $_REQUEST['action'] ?? '';
 							<h3 class="row mt-2 ml-1 text-info" id="category-part">3 - Asignar categoría/s:</h3>
 							<form>
 								<div class="control-group">
-									 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-									 	<h5 class="text-info mt-3">Listado de categorías asignadas</h5>
+									 <div class="form-group floating-label-form-group controls mb-2 pb-2">
+										<h5 class="text-info mt-3">Listado de categorías asignadas</h5>
 										<div class="table-responsive">
 											<table id="category-assigned" class="table table-striped compact nowrap" style="min-width:100%">
 												<thead><!-- Leave empty. Column titles are automatically generated --></thead>
 											</table>
 										</div>
-									 	<h5 class="text-info mt-3">Listado de categorías sin asignar</h5>
+										<h5 class="text-info mt-3">Listado de categorías sin asignar</h5>
 										<div class="table-responsive">
 											<table id="category-not-assigned" class="table table-striped compact nowrap" style="min-width:100%">
 												<thead><!-- Leave empty. Column titles are automatically generated --></thead>
@@ -146,6 +149,9 @@ $action = $_REQUEST['action'] ?? '';
 										</div>
 										<p class="help-block text-danger" style="display:none;"></p>
 									</div>
+									<a href="../category/edit_create.php">
+										<input type="button" class="btn btn-primary ml-5 mb-2" value="Crear nueva categoría"/>
+									</a>
 								</div>
 							</form>
 						</div>

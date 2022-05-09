@@ -9,6 +9,8 @@ require_once("controller.php");
 
 class Author {
 	private const TABLE = 'author';
+	private const TABLE_BOOK_AUTHORS = 'book_authors';
+
 	private $id;
 
 
@@ -24,7 +26,7 @@ class Author {
 		} else {
 			$this->id = '';
 			$this->name = '';
-			$this->pseydonym = '';
+			$this->pseudonym = '';
 			$this->birthdate = '';
 			$this->death_date = '';
 		}
@@ -32,6 +34,8 @@ class Author {
 
 
 	public static function insert($name, $pseudonym, $birthdate, $death_date) {
+		$birthdate = inverse_date($birthdate);
+		$death_date = inverse_date($death_date);
 		$sql = "INSERT INTO `".self::TABLE."`
 				(name, pseudonym, birthdate, death_date)
 				VALUES ('$name', '$pseudonym', '$birthdate', '$death_date')";
@@ -41,6 +45,8 @@ class Author {
 
 
 	public static function update($id, $name, $pseudonym, $birthdate, $death_date) {
+		$birthdate = inverse_date($birthdate);
+		$death_date = inverse_date($death_date);
 		$sql = "UPDATE `".self::TABLE."`
 			SET `name` = '$name',
 				`pseudonym` = '$pseudonym',
@@ -55,6 +61,11 @@ class Author {
 
 	public static function delete($id) {
 		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_AUTHORS."`
+			WHERE `id` = '$id'";
+		$res = self::query($sql);
+
+		$sql = "DELETE
 			FROM `".self::TABLE."`
 			WHERE `id` = '$id'";
 		$res = self::query($sql);
@@ -63,7 +74,7 @@ class Author {
 	}
 
 
-	public static function get_author(string $id) : ?Book {
+	public static function get_author(string $id) : ?Author {
 		$sql = "SELECT * 
 			FROM `".self::TABLE."` 
 			WHERE `id` = '$id'";
@@ -75,10 +86,10 @@ class Author {
 		}
 
 		$data = $result->fetch(PDO::FETCH_ASSOC);
-		$autor = new Author($data);
-		return $autor;
+		$author = new Author($data);
+		return $author;
 
-		return $autor;
+		return $author;
 	}
 
 
