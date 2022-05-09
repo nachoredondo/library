@@ -17,8 +17,14 @@
 
 <!-- Plugins JS-->
 <script src="../../assets/jquery/jquery.min.js"></script>
+<script src="../../assets/js/scripts.js"></script>
+<script src="../../assets/sweetalert/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../assets/datatables/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<script src="../../assets/datatables/jquery.dataTables.min.js"></script>
+<script src="../../assets/datatables/dataTables.bootstrap.min.js"></script>
 
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="../../assets/css/bootstrap.css" rel="stylesheet" />

@@ -49,7 +49,7 @@ $surnames = $_REQUEST['surnames'] ?? '';
 						endif;
 					endif;
 					?>
-					<form class="form" method="post" action="create_user.php" role="form" id="the-form">
+					<form class="form" method="post" action="../../api/user/create.php" role="form" id="the-form">
 						<div class="row mt-1">
 							<div class="input-group no-border mr-2">
 								<input type="text" placeholder="Usuario" class="form-control ml-3" name="user" id="user" value="<?php echo $user; ?>" required size="25"/>

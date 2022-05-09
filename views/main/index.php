@@ -42,28 +42,39 @@ $books = Book::search_books($search);
 						</div>
 					</div>
 					<div class="row">
-						<button type='button' style="margin: 0 auto;" title='Añadir a mis libros' class='edit-btn btn btn-primary btn-sm ml-5'>
-									Nuevo libro<i class='fas fa-plus ml-1'></i>
-						</button>
+						<a href="../book/edit_create.php">
+							<button type='button' style="margin: 0 auto;" title='Añadir a mis libros' class='edit-btn btn btn-primary btn-sm ml-5'>
+										Nuevo libro<i class='fas fa-plus ml-1'></i>
+							</button>
+						</a>
 					</div>
 					<div class="row m-2 ml-3">
-						<?php foreach ($books as $book) { ?>
-							<div class="card p-2 m-2 col-12 col-sm-5 col-md-3 col-lg-2">
-								<a href="../book/view.php?id=<?php echo $book['id'];?>">
-									<div><?php echo $book['title'] ?></div>
-									<img class="p-2" id="image-book" alt="<?php echo $book['title'] ?>" src="../../files/book/book.jpg"/>
-								</a>
-								<div class="isbn mt-1">ISBN: <?php echo $book['ISBN'] ?></div>
-								<form action="../book/edit_create.php" class="mt-1">
-									<input type="hidden" value="<?php echo $book['id'];?>" name="id">
-									<input class="btn btn-primary btn-sm mb-2" value="Editar" type="submit">
-								</form>
-								<button type='button' title='Reservar a mis libros' class='edit-btn btn btn-info btn-sm'>
-									Reservar libro<i class='fas fa-plus ml-1'></i>
-								</button>
-								</form>
+						<?php if (count($books) == 0){ ?>
+							<div class="text-warning ml-4 mt-2">
+								No hay ningun libro registrado.
 							</div>
-						<?php } ?>
+						<?php 
+							} else {
+								foreach ($books as $book) { ?>
+								<div class="card p-2 m-2 col-12 col-sm-5 col-md-3 col-lg-2">
+									<a href="../book/view.php?id=<?php echo $book['id'];?>">
+										<div><?php echo $book['title'] ?></div>
+										<img class="p-2" id="image-book" alt="<?php echo $book['title'] ?>" src="../../files/book/<?php echo $book['image']; ?>"/>
+									</a>
+									<div class="isbn mt-1">ISBN: <?php echo $book['ISBN'] ?></div>
+									<form action="../book/edit_create.php" class="mt-1">
+										<input type="hidden" value="<?php echo $book['id'];?>" name="id">
+										<input class="btn btn-primary btn-sm mb-2" value="Editar" type="submit">
+									</form>
+									<button type='button' title='Reservar a mis libros' class='edit-btn btn btn-info btn-sm'>
+										Reservar libro<i class='fas fa-plus ml-1'></i>
+									</button>
+									</form>
+								</div>
+						<?php 
+							}
+						}
+						?>
 					</div>
 				</div>
 			</div>

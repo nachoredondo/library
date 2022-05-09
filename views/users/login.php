@@ -10,7 +10,6 @@ $action = $_REQUEST['action'] ?? '';
 	<head>
 		<?php include "../general/header.php" ?>
 		<title>Login</title>
-		<script src="../../assets/sweetalert/sweetalert.min.js"></script>
 	</head>
 	<body id="image-login">
 		<div class="container">

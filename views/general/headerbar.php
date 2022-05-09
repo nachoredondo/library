@@ -22,22 +22,22 @@ $user_child = User::get_user_from_user($_SESSION['user'])
 			</div>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/author/">
+					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/author/index.php">
 						<i class='fas fa-id-card'></i> Autores
 					</a>
 				</li>
 				<li class="nav-item ml-1 mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/author/">
+					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/main/index.php">
 						<i class='fas fa-book'></i> Catálogo
 					</a>
 				</li>
 				<li class="nav-item ml-1 mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/author/">
+					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/book/personal_catalog.php">
 						<i class='fas fa-book'></i> Mis libros
 					</a>
 				</li>
 				<li class="nav-item ml-1 mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/category/">
+					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/category/index.php">
 						<i class='fas fa-align-justify mr-1'></i>Categorías
 					</a>
 				</li>

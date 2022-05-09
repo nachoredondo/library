@@ -23,29 +23,32 @@ class Book {
 			$this->id($data['id']);
 			$this->title($data['title']);
 			$this->ISBN($data['ISBN']);
+			$this->image($data['image']);
 			$this->description($data['description']);
 		} else {
 			$this->id = '';
 			$this->title = '';
 			$this->ISBN = '';
+			$this->image = '';
 			$this->description = '';
 		}
 	}
 
 
-	public static function insert_book($title, $ISBN, $description) {
+	public static function insert($title, $ISBN, $image, $description) {
 		$sql = "INSERT INTO `".self::TABLE."`
-				(title, ISBN, description)
-				VALUES ('$title', '$ISBN', '$description')";
+				(title, ISBN, image, description)
+				VALUES ('$title', '$ISBN', '$image', '$description')";
 		$res = self::query($sql);
 		return $res;
 	}
 
 
-	public static function update_book($id, $title, $ISBN, $description) {
+	public static function update($id, $title, $ISBN, $image, $description) {
 		$sql = "UPDATE `".self::TABLE."`
 			SET `title` = '$title',
 				`ISBN` = '$ISBN',
+				`image` = '$image',
 				`description` = '$description'
 			WHERE `id` = '$id'";
 		$res = self::query($sql);
@@ -54,10 +57,50 @@ class Book {
 	}
 
 
-	public static function delete_book($id) {
+	public static function delete($id) {
 		$sql = "DELETE
 			FROM `".self::TABLE."`
 			WHERE `id` = '$id'";
+		$res = self::query($sql);
+
+		return $res;
+	}
+
+
+	public static function assign_author($id_book, $id_author) {
+		$sql = "INSERT INTO `".self::TABLE_BOOK_AUTHORS."`
+				(id_book, id_author)
+				VALUES ('$id_book', '$id_author')";
+		$res = self::query($sql);
+		return $res;
+	}
+
+
+	public static function unassign_author($id_book, $id_author) {
+		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_AUTHORS."`
+			WHERE `id_book` = '$id_book'
+				AND `id_author` = '$id_author'";
+		$res = self::query($sql);
+
+		return $res;
+	}
+
+
+	public static function assign_category($id_book, $id_category) {
+		$sql = "INSERT INTO `".self::TABLE_BOOK_CATEGORIES."`
+				(id_book, id_category)
+				VALUES ('$id_book', '$id_category')";
+		$res = self::query($sql);
+		return $res;
+	}
+
+
+	public static function unassign_category($id_book, $id_category) {
+		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_CATEGORIES."`
+			WHERE `id_book` = '$id_book'
+				AND `id_category` = '$id_category'";
 		$res = self::query($sql);
 
 		return $res;
@@ -129,7 +172,7 @@ class Book {
 	}
 
 
-	public function id() : int {
+	public function id() {
 		return $this->id;
 	}
 
@@ -150,11 +193,19 @@ class Book {
 	}
 
 
+	public function image(?string $image = "") : ?string {
+		if (isset($image)) {
+			$this->image = $image;
+		}
+		return $this->image;
+	}
+
+
 	public function description(?string $description = "") : ?string {
 		if (isset($description)) {
 			$this->description = $description;
 		}
-		return $description;
+		return $this->description;
 	}
 
 

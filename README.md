@@ -1,4 +1,4 @@
-# DOCUMENTATION Catalog 
+# Library documentation 
 
 
 ## Installation & upgrades
