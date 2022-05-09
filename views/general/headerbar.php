@@ -32,13 +32,18 @@ $user_child = User::get_user_from_user($_SESSION['user'])
 					</a>
 				</li>
 				<li class="nav-item ml-1 mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/book/personal_catalog.php">
+					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/category/index.php">
+						<i class='fas fa-align-justify mr-1'></i>Categorías
+					</a>
+				</li>
+				<li class="nav-item ml-1 mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/main/index.php?my-books">
 						<i class='fas fa-book'></i> Mis libros
 					</a>
 				</li>
 				<li class="nav-item ml-1 mx-0 mx-lg-1">
 					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/category/index.php">
-						<i class='fas fa-align-justify mr-1'></i>Categorías
+						<i class='fas fa-align-justify mr-1'></i>Documentación
 					</a>
 				</li>
 			</ul>

@@ -8,10 +8,18 @@ Session::check_login_redirect();
 $user = User::get_user_from_user($_SESSION['user']);
 if (isset($_REQUEST['search'])){
 	$search = $_REQUEST['search'];
-}else {
+} else {
 	$search = '';
 }
-$books = Book::search_books($search);
+
+if (isset($_REQUEST['my-books'])){
+	$personal = $user->id();
+} else {
+	$personal = false;
+}
+
+
+$books = Book::search_books($search, $personal);
 
 ?>
 
@@ -30,7 +38,12 @@ $books = Book::search_books($search);
 				<!-- Rules Section Heading-->
 				<div class="mr-3">
 					<h2 class="text-center text-uppercase text-secondary mt-4 ml-5">
-						Catálogo
+						<?php 
+							if ($personal) 
+								echo "Libros reservados"; 
+							else 
+								echo "Catálogo"; 
+						?>
 					</h2>
 					<div class="input-group mb-3 ml-4">
 						<h3 class="card-title">Buscador de libros</h3>
@@ -86,9 +99,15 @@ $books = Book::search_books($search);
 			<a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
 		</div>
 		<script type="text/javascript">
+			let personal = "<?php echo $personal; ?>";
 			function search(){
 				let search = document.getElementById('search').value;
-				location.href = "index.php?search=" + search;
+				let href = "index.php?search=" + search;
+				// console.log(personal);
+				if (personal)
+					href += "&my-books"
+				// console.log(href);
+				location.href = href;
 			}
 
 			$("#search-addon").on('click', function(){

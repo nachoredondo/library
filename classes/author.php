@@ -103,7 +103,7 @@ class Author {
 	}
 
 
-	public function birthdate(?date $birthdate = "") : ?date {
+	public function birthdate(?string $birthdate = "") : ?string {
 		if (isset($birthdate)) {
 			$this->birthdate = $birthdate;
 		}
@@ -111,7 +111,7 @@ class Author {
 	}
 
 
-	public function death_date(?date $death_date = "") : ?date {
+	public function death_date(?string $death_date = "") : ?string {
 		if (isset($death_date)) {
 			$this->death_date = $death_date;
 		}

@@ -140,13 +140,21 @@ class Book {
 	}
 
 
-	public static function search_books(string $search) {
-		$sql = "SELECT * 
-			FROM `".self::TABLE."` 
-			WHERE `title` LIKE '%$search%'
-				OR `ISBN` LIKE '%$search%'
-			ORDER BY `id` DESC
-			LIMIT 10";
+	public static function search_books(string $search, ?int $id_user) {
+		$where_user = "";
+		if ($id_user)
+			$where_user = "AND u.`id` = 1";
+		
+		$sql = "SELECT b.* 
+				FROM `book` as b
+				LEFT JOIN `book_users` as bu ON b.`id` = bu.`id_book`
+				LEFT JOIN `user` as u ON bu.`id_user` = u.`id`
+				WHERE (`title` LIKE '%$search%' 
+					OR `ISBN` LIKE '%$search%' )
+				    $where_user
+				ORDER BY b.`id` DESC 
+				LIMIT 10";
+				
 		$result = self::query($sql);
 		if (!$result){
 			return null;
