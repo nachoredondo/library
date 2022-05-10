@@ -1,11 +1,8 @@
 <?php
 require("../../classes/book.php");
 require '../../classes/session.php';
-require '../../classes/user.php';
 
 Session::check_login_redirect();
-$user = User::get_user_from_user($_SESSION['user']);
-
 $errors = [];
 
 $type_author = $_POST['type_author'] ?? 'NULL';

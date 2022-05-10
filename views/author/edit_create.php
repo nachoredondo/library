@@ -48,7 +48,7 @@ if (isset($_REQUEST['id'])) {
 										<label>Nombre</label>
 										<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-name"></i>
 									</div>
-									<input class="form-control" id="name" name="name" type="text" required="required" value="<?php echo $author->name();?>"data-validation-required-message="Por favor introduce el nombre." placeholder="Nombre" />
+									<input class="form-control" id="name" name="name" type="text" placeholder="Nombre" required="required" value="<?php echo $author->name();?>"data-validation-required-message="Por favor introduce el nombre" />
 									<p class="help-block text-danger"></p>
 								</div>
 							</div>
@@ -58,7 +58,7 @@ if (isset($_REQUEST['id'])) {
 										<label>Pseudónimo</label>
 										<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-pseudonym"></i>
 									</div>
-									<input class="form-control" id="pseudonym" name="pseudonym" type="text" placeholder="Pseudónimo" required="required" value="<?php echo $author->pseudonym();?>"data-validation-required-message="Por favor introduce el pseudónimo." />
+									<input class="form-control" id="pseudonym" name="pseudonym" type="text" placeholder="Pseudónimo" required="required" value="<?php echo $author->pseudonym();?>"data-validation-required-message="Por favor introduce el pseudónimo" />
 									<p class="help-block text-danger"></p>
 								</div>
 							</div>

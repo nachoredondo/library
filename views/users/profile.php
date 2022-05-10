@@ -44,7 +44,6 @@ $action = $_REQUEST['action'] ?? '';
 								<div class="form-group floating-label-form-group controls mb-0">
 									<div class="row ml-1">
 										<label>Correo</label>
-										<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-email"></i>
 									</div>
 									<input class="form-control" id="new-email" name="new_email" type="email" placeholder="Correo" required="required" value="<?php echo $user->email();?>"data-validation-required-message="Por favor introduce el correo." />
 									<p class="help-block text-danger"></p>
@@ -73,7 +72,7 @@ $action = $_REQUEST['action'] ?? '';
 							<br />
 							<div id="success"></div>
 							<div class="form-group">
-								<button class="btn btn-primary btn-lg ml-2 mb-2" id="sendMessageButton" name="form" value="data" type="submit">Actualizar datos</button>
+								<button class="btn btn-primary ml-2 mb-2" id="sendMessageButton" name="form" value="data" type="submit">Actualizar datos</button>
 							</div>
 						</form>
 						<h3 class="row mt-5 ml-1 text-info">Cambiar contraseña:</h3>
@@ -95,8 +94,8 @@ $action = $_REQUEST['action'] ?? '';
 							</div>
 							<br />
 							<div class="form-group">
-								<button class="btn btn-primary btn-lg ml-2 mb-2" id="button-update-pwd" name="form" value="pwd" type="submit">Cambiar contraseña</button>
-								<button class="btn btn-primary btn-lg ml-2 mb-2" id="button-delete-tutor" name="form" value="delete-tutor" type="submit">Eliminar usuario</button>
+								<button class="btn btn-primary ml-2 mb-2" id="button-update-pwd" name="form" value="pwd" type="submit">Cambiar contraseña</button>
+								<button class="btn btn-danger ml-2 mb-2" id="button-delete-tutor" name="form" value="delete-tutor" type="submit">Eliminar usuario</button>
 							</div>
 						</form>
 					</div>
@@ -114,9 +113,6 @@ $action = $_REQUEST['action'] ?? '';
 				let sr = new webkitSpeechRecognition();
 				$("#audio-user").mousedown(function(){
 					recognition("#user");
-				});
-				$("#audio-email").mousedown(function(){
-					recognition("#new-email");
 				});
 				$("#audio-name").mousedown(function(){
 					recognition("#name");

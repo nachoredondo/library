@@ -18,8 +18,8 @@ if (isset($_REQUEST['my-books'])){
 	$personal = false;
 }
 
-
 $books = Book::search_books($search, $personal);
+$action = $_REQUEST['action'] ?? '';
 
 ?>
 
@@ -79,9 +79,15 @@ $books = Book::search_books($search, $personal);
 										<input type="hidden" value="<?php echo $book['id'];?>" name="id">
 										<input class="btn btn-primary btn-sm mb-2" value="Editar" type="submit">
 									</form>
-									<button type='button' title='Reservar a mis libros' class='edit-btn btn btn-info btn-sm'>
-										Reservar libro<i class='fas fa-plus ml-1'></i>
-									</button>
+									<?php if (is_int($book['id_book_user'])) { ?>
+										<button onclick="delete_reservation('<?php echo $book['id_book_user'];?>')" type='button' title='Quitar reserva' class='edit-btn btn btn-warning btn-sm'>
+											Quitar reserva<i class='fas fa-minus ml-1'></i>
+										</button>
+									<?php } else { ?>
+										<button onclick="reserve('<?php echo $book['id'];?>')" type='button' title='Reservar a mis libros' class='edit-btn btn btn-info btn-sm'>
+											Reservar libro<i class='fas fa-plus ml-1'></i>
+										</button>
+									<?php } ?>
 									</form>
 								</div>
 						<?php 
@@ -103,16 +109,56 @@ $books = Book::search_books($search, $personal);
 			function search(){
 				let search = document.getElementById('search').value;
 				let href = "index.php?search=" + search;
-				// console.log(personal);
 				if (personal)
 					href += "&my-books"
-				// console.log(href);
 				location.href = href;
 			}
 
 			$("#search-addon").on('click', function(){
 				search();
 			});
+
+			function reserve(id_book){
+				make_request(
+					'<?php echo APP_ROOT ?>api/book/reservate.php', 
+					{ 
+						action: "Reserve",
+						id_book: id_book,
+						personal: "<?php echo $personal;?>"
+					}
+				);
+			}
+
+			function delete_reservation(id_reservation){
+				make_request(
+					'<?php echo APP_ROOT ?>api/book/reservate.php', 
+					{ 
+						action: "Delete",
+						id_reservation: id_reservation,
+						personal: "<?php echo $personal;?>"
+					}
+				);
+			}
+
+			<?php if ($action === 'reserve'): ?>
+				swal({
+					title: "Libro reservado",
+					buttonsStyling: false,
+					confirmButtonClass: "btn btn-success",
+					icon: "success",
+					button: "Vale",
+				}).catch(swal.noop);
+			<?php elseif ($action === 'delete'): ?>
+				swal({
+					title: "Reserva quitada",
+					buttonsStyling: false,
+					confirmButtonClass: "btn btn-success",
+					icon: "success",
+					button: "Vale",
+				}).catch(swal.noop);
+			<?php endif; ?>
+
+
 		</script>
 	</body>
 </html>

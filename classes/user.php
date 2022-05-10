@@ -3,6 +3,7 @@ require_once("controller.php");
 
 class User {
 	private const TABLE = 'user';
+	private const TABLE_BOOK_USERS = 'book_users';
 	private $id;
 	private $user;
 	private $email;
@@ -196,6 +197,13 @@ class User {
 		$res = self::query($sql);
 
 		return $res;
+
+		$sql = "DELETE
+					FROM `".self::TABLE_BOOK_USERS."`
+					WHERE `id_user` = '$id'";
+		$res = self::query($sql);
+
+		return $res;
 	}
 
 	public static function password_update(int $id, string $password, string $password_confirm) {
@@ -233,11 +241,6 @@ class User {
 	}
 
 	public static function validate_email(string $email) : string {
-		// var_dump($email);
-		// var_dump(FILTER_VALIDATE_EMAIL);
-		// var_dump(filter_var($email, FILTER_VALIDATE_EMAIL));
-		// exit();
-
 		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 

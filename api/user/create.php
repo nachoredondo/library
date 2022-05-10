@@ -13,12 +13,12 @@ $password_confirm = $_POST['password-confirm'] ?? 'NULL';
 $parameter = "&user=".$user."&name=".$name."&email=".$email."&surnames=".$surnames;
 
 if(strlen($password) < 8 || strlen($password) > 128) {
-	header('Location: ./registrer.php?success=false&error=password-length'.$parameter);
+	header('Location: ../../views/users/registrer.php?success=false&error=password-length'.$parameter);
 	exit();
 }
 
 if($password != $password_confirm) {
-	header('Location: ./registrer.php?success=false&error=no-same-password'.$parameter);
+	header('Location: ../../views/users/registrer.php?success=false&error=no-same-password'.$parameter);
 	exit();
 }
 
@@ -28,12 +28,12 @@ try {
 	$errors[] = "incorrect_camp";
 	$message = $e->getMessage();
 	$error = implode(',', $errors);
-	header('Location: ./registrer.php?success=false&error='.$error.'&message='.$message.$parameter);
+	header('Location: ../../views/users/registrer.php?success=false&error='.$error.'&message='.$message.$parameter);
 }
 if (!$errors) {
 	if ($success) {
 		header('Location: ./login.php?action=created');
 	} else {
-		header('Location: ./registrer.php?success='.($success === false ? 'false' : 'true'));
+		header('Location: ../../views/users/registrer.php?success='.($success === false ? 'false' : 'true'));
 	}
 }

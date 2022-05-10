@@ -94,7 +94,7 @@ $surnames = $_REQUEST['surnames'] ?? '';
 						</div>
 						<div class="text-center mt-3 ml-5 mr-5">
 							<button type="submit" class="btn btn-primary mr-2" name="login">Crear</button>
-							<a href="login.php">
+							<a href="../../api/user/login.php">
 								<input type="button" class="btn btn-primary ml-2" value="Volver"/>
 							</a>
 						</div>

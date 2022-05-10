@@ -10,11 +10,13 @@ function relpath($path = __FILE__) {
 	return $relp;
 }
 
+// invert data
 function inverse_date($date){
 	$date = explode("-", $date);
 	return $date[2] . "-" . $date[1] . "-" . $date[0];
 }
 
+// get constructor connection with the las controller
 function get_db_connection($dbname = null) {
 	$conn = Controller::get_global_connection();
 	return $conn;

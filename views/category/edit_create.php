@@ -54,7 +54,7 @@ if (isset($_REQUEST['id'])) {
 										<label>Descripción</label>
 										<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-description"></i>
 									</div>
-									<input class="form-control" id="description" name="description" type="text" placeholder="Descripción" required="required" value="<?php echo $category->description;?>"data-validation-required-message="Por favor introduce la descripción." />
+									<input class="form-control" id="description" name="description" type="text" required="required" value="<?php echo $category->description;?>"data-validation-required-message="Por favor introduce la descripción." placeholder="Descripción" />
 									<p class="help-block text-danger"></p>
 								</div>
 							</div>
@@ -80,8 +80,8 @@ if (isset($_REQUEST['id'])) {
 				$("#audio-name").mousedown(function(){
 					recognition("#name");
 				});
-				$("#audio-decription").mousedown(function(){
-					recognition("#decription");
+				$("#audio-description").mousedown(function(){
+					recognition("#description");
 				});
 
 				function  recognition(id){

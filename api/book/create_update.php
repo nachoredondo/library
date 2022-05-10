@@ -21,6 +21,16 @@ if (!$fileName && !$file){
 	exit();
 }
 
+if (!$title){
+	header('Location: ../../views/book/edit_create.php?action=err&message=Título vacío');
+	exit();
+}
+
+if (!$isbn){
+	header('Location: ../../views/book/edit_create.php?action=err&message=ISBN vacío');
+	exit();
+}
+
 if ($fileSize > 8000000) {
 	header('Location: ../../views/book/edit_create.php?action=err&message=Tamaño máximo del archivo adjuntado sobrepasado (8 Megabytes)');
 	exit();
@@ -60,7 +70,8 @@ if (!$errors) {
 					header('Location: ../../views/book/edit_create.php?action=create_option&message='.$message);
 				}
 			}
-			header('Location: ../../views/book/edit_create.php?action=create');
+			$id = Book::get_last_id();
+			header('Location: ../../views/book/edit_create.php?action=create&id='.$id);
 		} else if ($form == "Editar") {
 			if ($fileName != null) {
 				if (!file_exists($uploadFileDir)) {

@@ -41,11 +41,6 @@ $user_child = User::get_user_from_user($_SESSION['user'])
 						<i class='fas fa-book'></i> Mis libros
 					</a>
 				</li>
-				<li class="nav-item ml-1 mx-0 mx-lg-1">
-					<a class="nav-link py-3 px-0 px-lg-2 rounded js-scroll-trigger" href="<?php echo APP_ROOT; ?>views/category/index.php">
-						<i class='fas fa-align-justify mr-1'></i>Documentación
-					</a>
-				</li>
 			</ul>
 		</div>
 		<a class="nav-link dropdown-toggle" href="#" id="navUserDropdown" data-toggle="dropdown">
@@ -54,7 +49,7 @@ $user_child = User::get_user_from_user($_SESSION['user'])
 		</a>
 		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navUserDropdown">
 			<a class="dropdown-item" href="../../views/users/profile.php">Mi perfil</a>
-			<a class="dropdown-item" href="../../views/users/logout.php">
+			<a class="dropdown-item" href="../../api/user/logout.php">
 				<i class="fas fa-sign-out-alt"></i> Cerrar sesión
 			</a>
 		</div>

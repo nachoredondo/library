@@ -134,25 +134,19 @@ ALTER TABLE `book`
 -- Indices de la tabla `book_authors`
 --
 ALTER TABLE `book_authors`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_authors_author` (`id_author`),
-  ADD KEY `book_authors_book` (`id_book`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `book_categories`
 --
 ALTER TABLE `book_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_categories_book` (`id_book`),
-  ADD KEY `book_categories_category` (`id_category`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `book_users`
 --
 ALTER TABLE `book_users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_users_book` (`id_book`),
-  ADD KEY `book_users_user` (`id_user`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `category`
@@ -214,30 +208,7 @@ ALTER TABLE `category`
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- Restricciones para tablas volcadas
---
 
---
--- Filtros para la tabla `book_authors`
---
-ALTER TABLE `book_authors`
-  ADD CONSTRAINT `book_authors_author` FOREIGN KEY (`id_author`) REFERENCES `author` (`id`),
-  ADD CONSTRAINT `book_authors_book` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`);
-
---
--- Filtros para la tabla `book_categories`
---
-ALTER TABLE `book_categories`
-  ADD CONSTRAINT `book_categories_book` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `book_categories_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`);
-
---
--- Filtros para la tabla `book_users`
---
-ALTER TABLE `book_users`
-  ADD CONSTRAINT `book_users_book` FOREIGN KEY (`id_book`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `book_users_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

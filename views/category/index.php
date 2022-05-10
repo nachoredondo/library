@@ -52,28 +52,6 @@ $action = $_REQUEST['action'] ?? '';
 			<a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
 		</div>
 		<script type="text/javascript">
-			function make_request(path, params, method) {
-				method = method || "post"; // Set method to post by default if not specified.
-
-				var form = document.createElement("form");
-				form.setAttribute("method", method);
-				form.setAttribute("action", path);
-
-				for (var key in params) {
-					if (params.hasOwnProperty(key)) {
-						var hiddenField = document.createElement("input");
-						hiddenField.setAttribute("type", "hidden");
-						hiddenField.setAttribute("name", key);
-						hiddenField.setAttribute("value", params[key]);
-
-						form.appendChild(hiddenField);
-					}
-				}
-
-				document.body.appendChild(form);
-				form.submit();
-			}
-
 			window.addEventListener('load', function () {
 				let table_category = $('#table-category').DataTable({
 					order: [[1, 'asc']],
@@ -131,7 +109,7 @@ $action = $_REQUEST['action'] ?? '';
 						.then((willDelete) => {
 							if (willDelete) {
 								make_request(
-									'<?php echo APP_ROOT ?>/api/category/edit_create.php',
+									'<?php echo APP_ROOT ?>api/category/edit_create.php',
 									{
 										id: data["id"],
 										form: "delete"

@@ -8,12 +8,15 @@ class Config implements \ArrayAccess {
 	}
 
 	public static function get_dt_config(string $database = null) : ?array {
+		// localhost connection
 		return [
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => '',
 			'database' => 'library',
 		];
+
+		// connection with cleardb in Heroku
 		$conf = parse_url(getenv("CLEARDB_DATABASE_URL"));
 		return [
 			'host' => $conf['host'],
@@ -24,6 +27,7 @@ class Config implements \ArrayAccess {
 		];
 	}
 
+	
 	/* Implement ArrayAccess methods */
 	public function offsetExists ($offset) : bool {
 		return isset($this->config[$offset]);

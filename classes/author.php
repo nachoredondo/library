@@ -61,13 +61,15 @@ class Author {
 
 	public static function delete($id) {
 		$sql = "DELETE
-			FROM `".self::TABLE_BOOK_AUTHORS."`
+			FROM `".self::TABLE."`
 			WHERE `id` = '$id'";
 		$res = self::query($sql);
 
+		return $res;
+
 		$sql = "DELETE
-			FROM `".self::TABLE."`
-			WHERE `id` = '$id'";
+			FROM `".self::TABLE_BOOK_AUTHORS."`
+			WHERE `id_author` = '$id'";
 		$res = self::query($sql);
 
 		return $res;

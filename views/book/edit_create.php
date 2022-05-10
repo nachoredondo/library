@@ -10,10 +10,12 @@ if (isset($_REQUEST['id'])) {
 	$book = Book::get_book($_REQUEST['id']);
 	$value_submit = "Editar";
 	$id = $_REQUEST['id'];
+	$hidden = "";
 } else {
 	$book = new Book();
 	$value_submit = "Crear";
 	$id = null;
+	$hidden = "hidden";
 }
 
 $action = $_REQUEST['action'] ?? '';
@@ -65,7 +67,7 @@ $action = $_REQUEST['action'] ?? '';
 											<label>ISBN</label>
 											<label class="text-danger ml-3">✱</label>
 										</div>
-										<input class="form-control" id="ISBN" name="ISBN" type="text" required="required" value="<?php echo $book->isbn();?>"data-validation-required-message="Por favor introduce el ISBN." placeholder="ISBN" />
+										<input class="form-control" id="ISBN" name="ISBN" type="text" required="required" value="<?php echo $book->ISBN();?>"data-validation-required-message="Por favor introduce el ISBN." placeholder="ISBN" />
 										<p class="help-block text-danger"></p>
 									</div>
 								</div>
@@ -98,14 +100,14 @@ $action = $_REQUEST['action'] ?? '';
 									</div>
 								</div>
 								<div class="form-group mt-3">
-									<button class="btn btn-primary ml-4 mb-2" id="createEditButton" name="form" value="<?php echo $value_submit;?>" type="submit"><?php echo $value_submit;?></button>
+									<button class="btn btn-primary ml-4" id="createEditButton" name="form" value="<?php echo $value_submit;?>" type="submit"><?php echo $value_submit;?></button>
 									<?php if (isset($_REQUEST['id'])) { ?>
-										<button class="btn btn-danger mr-4 mb-2 float-right" id="deleteButton" name="form" value="delete" type="submit">Eliminar</button>
+										<button class="btn btn-danger mr-4 float-right" id="deleteButton" name="form" value="delete" type="submit">Eliminar</button>
 									<?php } ?>
 								</div>
 							</form>
 						</div>
-						<div class="card p-3 mt-3">
+						<div class="card p-3 mt-3" <?php echo $hidden; ?>>
 							<h3 class="row mt-2 ml-1 text-info" id="author-part">2 - Asignar autor/es:</h3>
 							<form>
 								<div class="control-group">
@@ -130,7 +132,7 @@ $action = $_REQUEST['action'] ?? '';
 								</div>
 							</form>
 						</div>
-						<div class="card p-3 mt-3">
+						<div class="card p-3 mt-3" <?php echo $hidden; ?>>
 							<h3 class="row mt-2 ml-1 text-info" id="category-part">3 - Asignar categoría/s:</h3>
 							<form>
 								<div class="control-group">
@@ -166,7 +168,6 @@ $action = $_REQUEST['action'] ?? '';
 			<a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
 		</div>
 		<script type="text/javascript">
-			// window.location.href = window.location.href + "#third";
 			let action = "<?php echo $action; ?>";
 			if (action == "assign_author" || action == "unassign_author") {
 				window.location.href = window.location.href + "r#author-part";
@@ -432,6 +433,14 @@ $action = $_REQUEST['action'] ?? '';
 			<?php elseif ($action === 'create'): ?>
 				swal({
 					title: "Libro creado",
+					buttonsStyling: false,
+					confirmButtonClass: "btn btn-success",
+					icon: "success",
+					button: "Vale",
+				}).catch(swal.noop);
+			<?php elseif ($action === 'delete'): ?>
+				swal({
+					title: "Libro eliminado",
 					buttonsStyling: false,
 					confirmButtonClass: "btn btn-success",
 					icon: "success",

@@ -12,7 +12,9 @@ class Book {
 	private const TABLE_AUTHOR = 'author';
 	private const TABLE_BOOK_AUTHORS = 'book_authors';
 	private const TABLE_BOOK_CATEGORIES = 'book_categories';
+	private const TABLE_BOOK_USERS = 'book_users';
 	private const TABLE_CATEGORY = 'category';
+	private const TABLE_USER = 'user';
 	private $id;
 
 
@@ -64,6 +66,27 @@ class Book {
 		$res = self::query($sql);
 
 		return $res;
+
+		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_USERS."`
+			WHERE `id_book` = '$id'";
+		$res = self::query($sql);
+
+		return $res;
+
+		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_CATEGORIES."`
+			WHERE `id_book` = '$id'";
+		$res = self::query($sql);
+
+		return $res;
+
+		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_AUTHORS."`
+			WHERE `id_book` = '$id'";
+		$res = self::query($sql);
+
+		return $res;
 	}
 
 
@@ -107,6 +130,35 @@ class Book {
 	}
 
 
+	public static function reserve($id_book, $id_user) {
+		$sql = "SELECT * 
+				FROM `".self::TABLE_BOOK_USERS."`
+				WHERE `id_book` = '$id_book'
+					AND `id_user` = '$id_user'";
+		$res = self::query($sql);
+		$data = $res->fetch(PDO::FETCH_ASSOC);
+
+		if (!$data){
+			$sql = "INSERT INTO `".self::TABLE_BOOK_USERS."`
+				(id_book, id_user)
+				VALUES ('$id_book', '$id_user')";
+			$res = self::query($sql);
+		}
+
+		return $res;
+	}
+
+
+	public static function delete_reservation($id) {
+		$sql = "DELETE
+			FROM `".self::TABLE_BOOK_USERS."`
+			WHERE `id` = '$id'";
+		$res = self::query($sql);
+
+		return $res;
+	}
+
+
 	public static function get_book(string $id) : ?Book {
 		$sql = "SELECT * 
 			FROM `".self::TABLE."` 
@@ -121,8 +173,51 @@ class Book {
 		$data = $result->fetch(PDO::FETCH_ASSOC);
 		$book = new Book($data);
 		return $book;
+	}
 
-		return $book;
+
+	public static function get_last_id() : ?int {
+		$sql = "SELECT `id`
+			FROM `".self::TABLE."` 
+			ORDER BY `id` DESC
+			LIMIT 1";
+		$result = self::query($sql);
+
+		$data = $result->fetch(PDO::FETCH_ASSOC);
+		
+		return $data['id'];
+	}
+
+
+	public static function get_authors(int $id_book) {
+		$sql = "SELECT a.* 
+			FROM `".self::TABLE."` AS b
+			INNER JOIN `".self::TABLE_BOOK_AUTHORS."` AS ba ON b.`id` = ba.`id_book`
+			INNER JOIN `".self::TABLE_AUTHOR."` AS a ON ba.`id_author` = a.`id`
+			WHERE b.`id` = '$id_book'";
+		$result = self::query($sql);
+		if (!$result){
+			return null;
+		}
+
+		$data = $result->fetchAll();
+		return $data;
+	}
+
+
+	public static function get_categories(int $id_book) {
+		$sql = "SELECT c.* 
+			FROM `".self::TABLE."` AS b
+			INNER JOIN `".self::TABLE_BOOK_CATEGORIES."` AS bc ON b.`id` = bc.`id_book`
+			INNER JOIN `".self::TABLE_CATEGORY."` AS c ON bc.`id_category` = c.`id`
+			WHERE b.`id` = '$id_book'";
+		$result = self::query($sql);
+		if (!$result){
+			return null;
+		}
+
+		$data = $result->fetchAll();
+		return $data;
 	}
 
 
@@ -145,10 +240,10 @@ class Book {
 		if ($id_user)
 			$where_user = "AND u.`id` = 1";
 		
-		$sql = "SELECT b.* 
+		$sql = "SELECT b.*, bu.id as 'id_book_user'
 				FROM `book` as b
-				LEFT JOIN `book_users` as bu ON b.`id` = bu.`id_book`
-				LEFT JOIN `user` as u ON bu.`id_user` = u.`id`
+				LEFT JOIN `".self::TABLE_BOOK_USERS."` as bu ON b.`id` = bu.`id_book`
+				LEFT JOIN `".self::TABLE_USER."` as u ON bu.`id_user` = u.`id`
 				WHERE (`title` LIKE '%$search%' 
 					OR `ISBN` LIKE '%$search%' )
 				    $where_user

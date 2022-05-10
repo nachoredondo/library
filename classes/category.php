@@ -50,13 +50,15 @@ class Category {
 
 	public static function delete($id) {
 		$sql = "DELETE
-			FROM `".self::TABLE_BOOK_CATEGORIES."`
+			FROM `".self::TABLE."`
 			WHERE `id` = '$id'";
 		$res = self::query($sql);
 
+		return $res;
+
 		$sql = "DELETE
-			FROM `".self::TABLE."`
-			WHERE `id` = '$id'";
+			FROM `".self::TABLE_BOOK_CATEGORIES."`
+			WHERE `id_category` = '$id'";
 		$res = self::query($sql);
 
 		return $res;

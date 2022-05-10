@@ -11,6 +11,9 @@ else
 	header("Location: ../main/");
 
 $book = Book::get_book($id_book);
+$authors = Book::get_authors($id_book);
+$categories = Book::get_categories($id_book);
+
 
 ?>
 
@@ -38,16 +41,59 @@ $book = Book::get_book($id_book);
 						<?php echo $book->title() ?>
 					</h2>
 					<div class="card p-4 card-book-view" >
-						<?php if ($book->description()) { ?>
-							Descripción: <?php echo $book->description(); ?>
+						<?php if ($book->description) { ?>
+							Descripción: <?php echo $book->description; ?>
 						<?php } else { ?>
 							Sin descripción
 						<?php } ?>
 
-						<img class="mt-2 mb-2" id="image-book" alt="<?php echo $book->title(); ?>" src="../../files/book/book.jpg"/>
+						<img class="mt-2 mb-2" id="image-book" alt="<?php echo $book->title(); ?>" src="../../files/book/<?php echo $book->image; ?>"/>
 						<div class="isbn mt-1">ISBN: <?php echo $book->ISBN(); ?></div>
-					</div>
+						<div class="mt-2">
+							<?php if (count($authors) == 0){ ?>
+								No hay ningun autor asociado.
+							<?php 
+							} else {
+								if (count($authors) == 1)
+									echo "Autor: ";
+								else
+									echo "Autores: ";
+								$num_author = 1;
+								foreach ($authors as $author) {
+									echo $author['name'];
+									if ($num_author != count($authors))
+										echo ", ";
+									$num_author ++;
+								}
 
+							} ?>
+						</div>
+						<div class="mt-2">
+							<?php if (count($categories) == 0){ ?>
+								<div class="ml-4 mt-2">
+									No hay ningun autor asociado.
+								</div>
+							<?php 
+							} else {
+								if (count($categories) == 1)
+									echo "Categoría: ";
+								else
+									echo "Categorías: ";
+								$num_category = 1;
+								foreach ($categories as $category) {
+									echo $category['name'];
+									if ($num_category != count($categories))
+										echo ", ";
+									$num_category ++;
+								}
+
+							} ?>
+						</div>
+						<form action="../book/edit_create.php" class="mt-1">
+							<input type="hidden" value="<?php echo $id_book;?>" name="id">
+							<input class="btn btn-primary btn-sm mb-2 mt-3 ml-5" value="Editar" type="submit">
+						</form>
+					</div>
 				</div>
 			</div>
 		</section>

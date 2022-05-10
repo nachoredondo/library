@@ -46,7 +46,7 @@ if (!$errors) {
 		} else if ($form == "pwd") {
 			header('Location: ../../views/users/profile.php?action=pwd');
 		} else {
-			header('Location: ../../views/users/logout.php');
+			header('Location: ./logout.php');
 		}
 	} else {
 		header('Location: ../../views/users/profile.php?success='.($success === false ? 'false' : 'true'));
