@@ -235,10 +235,14 @@ class Book {
 	}
 
 
-	public static function search_books(string $search, ?int $id_user) {
+	public static function search_books(string $search, bool $show_all, ?int $id_user) {
 		$where_user = "";
 		if ($id_user)
 			$where_user = "AND u.`id` = 1";
+
+		$limit = "";
+		if (!$show_all)
+			$limit = "LIMIT 10";
 		
 		$sql = "SELECT b.*, bu.id as 'id_book_user'
 				FROM `book` as b
@@ -248,7 +252,7 @@ class Book {
 					OR `ISBN` LIKE '%$search%' )
 				    $where_user
 				ORDER BY b.`id` DESC 
-				LIMIT 10";
+				$limit";
 				
 		$result = self::query($sql);
 		if (!$result){
