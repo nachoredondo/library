@@ -11,7 +11,9 @@ function relpath($path = __FILE__) {
 }
 
 // invert data
-function inverse_date($date){
+function inverse_date($date) {
+	if (empty($date))
+		return $date;
 	$date = explode("-", $date);
 	return $date[2] . "-" . $date[1] . "-" . $date[0];
 }

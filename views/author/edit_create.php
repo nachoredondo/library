@@ -10,7 +10,7 @@ if (isset($_REQUEST['id'])) {
 	$id = $_REQUEST['id'];
 	$author = Author::get_author($_REQUEST['id']);
 	$birthdate = inverse_date($author->birthdate);
-	$death_date = inverse_date($author->death_date);
+	$death_date = inverse_date($author->death_date());
 	$value_submit = "Editar";
 } else {
 	$id = null;

@@ -35,10 +35,15 @@ class Author {
 
 	public static function insert($name, $pseudonym, $birthdate, $death_date) {
 		$birthdate = inverse_date($birthdate);
-		$death_date = inverse_date($death_date);
+		if (empty($death_date)) {
+			$death_date = " NULL ";
+		} else {
+			$death_date = inverse_date($death_date);
+			$death_date = " '$death_date' ";
+		}
 		$sql = "INSERT INTO `".self::TABLE."`
 				(name, pseudonym, birthdate, death_date)
-				VALUES ('$name', '$pseudonym', '$birthdate', '$death_date')";
+				VALUES ('$name', '$pseudonym', '$birthdate', $death_date)";
 		$res = self::query($sql);
 		return $res;
 	}
@@ -46,12 +51,17 @@ class Author {
 
 	public static function update($id, $name, $pseudonym, $birthdate, $death_date) {
 		$birthdate = inverse_date($birthdate);
-		$death_date = inverse_date($death_date);
+		if (empty($death_date)) {
+			$death_date = " NULL ";
+		} else {
+			$death_date = inverse_date($death_date);
+			$death_date = " '$death_date' ";
+		}
 		$sql = "UPDATE `".self::TABLE."`
 			SET `name` = '$name',
 				`pseudonym` = '$pseudonym',
 				`birthdate` = '$birthdate',
-				`death_date` = '$death_date'
+				`death_date` = $death_date
 			WHERE `id` = '$id'";
 		$res = self::query($sql);
 
