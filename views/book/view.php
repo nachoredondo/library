@@ -51,7 +51,7 @@ $categories = Book::get_categories($id_book);
 						<div class="isbn mt-1">ISBN: <?php echo $book->ISBN(); ?></div>
 						<div class="mt-2">
 							<?php if (count($authors) == 0){ ?>
-								No hay ningun autor asociado.
+								No hay ningún autor asociado.
 							<?php 
 							} else {
 								if (count($authors) == 1)
@@ -71,7 +71,7 @@ $categories = Book::get_categories($id_book);
 						<div class="mt-2">
 							<?php if (count($categories) == 0){ ?>
 								<div class="ml-4 mt-2">
-									No hay ningun autor asociado.
+									No hay ninguna categoría asociada.
 								</div>
 							<?php 
 							} else {

@@ -77,7 +77,7 @@ $action = $_REQUEST['action'] ?? '';
 							}
 						?></div>
 						<a href="../book/edit_create.php">
-							<button type='button' style="margin: 0 auto;" title='Añadir a mis libros' class='edit-btn btn btn-primary btn-sm ml-5'>
+							<button type='button' style="margin: 0 auto;" title='Añadir nuevo libro' class='edit-btn btn btn-primary btn-sm'>
 										Nuevo libro<i class='fas fa-plus ml-1'></i>
 							</button>
 						</a>
