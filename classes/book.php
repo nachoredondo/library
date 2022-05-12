@@ -235,10 +235,10 @@ class Book {
 	}
 
 
-	public static function search_books(string $search, bool $show_all, ?int $id_user) {
+	public static function search_books(string $search, bool $show_all, ?int $id_user, ?bool $personal) {
 		$where_user = "";
-		if ($id_user)
-			$where_user = "AND u.`id` = 1";
+		if ($personal)
+			$where_user = "AND u.`id` = '$id_user'";
 
 		$limit = "";
 		if (!$show_all)
@@ -246,11 +246,11 @@ class Book {
 		
 		$sql = "SELECT b.*, bu.id as 'id_book_user'
 				FROM `book` as b
-				LEFT JOIN `".self::TABLE_BOOK_USERS."` as bu ON b.`id` = bu.`id_book`
+				LEFT JOIN `".self::TABLE_BOOK_USERS."` as bu ON b.`id` = bu.`id_book` AND bu.id_user = $id_user
 				LEFT JOIN `".self::TABLE_USER."` as u ON bu.`id_user` = u.`id`
 				WHERE (`title` LIKE '%$search%' 
 					OR `ISBN` LIKE '%$search%' )
-				    $where_user
+					$where_user
 				ORDER BY b.`id` DESC 
 				$limit";
 				

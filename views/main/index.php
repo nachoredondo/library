@@ -13,16 +13,17 @@ if (isset($_REQUEST['search'])){
 }
 
 if (isset($_REQUEST['my-books'])){
-	$personal = $user->id();
+	$personal = true;
 } else {
 	$personal = false;
 }
 
+
 $show_all = isset($_REQUEST['list-all']) ? true : false;
 
-$books = Book::search_books($search, $show_all, $personal);
+$books = Book::search_books($search, $show_all, $user->id(), $personal);
 if (!$show_all) {
-	$total_books = Book::search_books($search, true, $personal);
+	$total_books = Book::search_books($search, true, $user->id(), $personal);
 	$total_books = count($total_books);
 } else {
 	$total_books = count($books);
