@@ -43,6 +43,7 @@ if (isset($_REQUEST['id'])) {
 									<div class="row ml-1">
 										<label>Nombre</label>
 										<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-name"></i>
+										<label class="text-danger ml-3">✱</label>
 									</div>
 									<input class="form-control" id="name" name="name" type="text" required="required" value="<?php echo $category->name();?>"data-validation-required-message="Por favor introduce el nombre." placeholder="Nombre" />
 									<p class="help-block text-danger"></p>
@@ -62,6 +63,9 @@ if (isset($_REQUEST['id'])) {
 							<div id="success"></div>
 							<div class="form-group">
 								<input class="btn btn-primary ml-2 mb-2" id="sendMessageButton" name="form" value="<?php echo $value_submit;?>" type="submit"></button>
+								<a href="index.php">
+									<input type="button" class="btn btn-primary ml-2 mb-2" value="Volver"/>
+								</a>
 							</div>
 						</form>
 					</div>
@@ -105,6 +109,16 @@ if (isset($_REQUEST['id'])) {
 					};
 				}
 			});
+
+			<?php if ($message): ?>
+				swal({
+					title: '<?php echo $message; ?>',
+					buttonsStyling: false,
+					confirmButtonClass: "btn btn-success",
+					icon: "error",
+					button: "Vale",
+				}).catch(swal.noop);
+			<?php endif; ?>
 		</script>
 	</body>
 </html>

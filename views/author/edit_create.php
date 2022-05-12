@@ -47,6 +47,7 @@ if (isset($_REQUEST['id'])) {
 									<div class="row ml-1">
 										<label>Nombre</label>
 										<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-name"></i>
+										<label class="text-danger ml-3">✱</label>
 									</div>
 									<input class="form-control" id="name" name="name" type="text" placeholder="Nombre" required="required" value="<?php echo $author->name();?>"data-validation-required-message="Por favor introduce el nombre" />
 									<p class="help-block text-danger"></p>
@@ -57,6 +58,7 @@ if (isset($_REQUEST['id'])) {
 									<div class="row ml-1">
 										<label>Pseudónimo</label>
 										<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-pseudonym"></i>
+										<label class="text-danger ml-3">✱</label>
 									</div>
 									<input class="form-control" id="pseudonym" name="pseudonym" type="text" placeholder="Pseudónimo" required="required" value="<?php echo $author->pseudonym();?>"data-validation-required-message="Por favor introduce el pseudónimo" />
 									<p class="help-block text-danger"></p>
@@ -66,6 +68,7 @@ if (isset($_REQUEST['id'])) {
 								<div class="form-group floating-label-form-group controls mb-0 pb-2">
 									<div class="row ml-1">
 										<label>Fecha de nacimiento</label>
+										<label class="text-danger ml-3">✱</label>
 									</div>
 									<input type="text" id="birthdate" class="form-control monthpicker" name="birthdate" autocomplete="off" value="<?php echo $birthdate; ?>"/>
 								</div>
@@ -149,6 +152,16 @@ if (isset($_REQUEST['id'])) {
 					close: 'fas fa-times'
 				},
 			});
+
+			<?php if ($message): ?>
+				swal({
+					title: '<?php echo $message; ?>',
+					buttonsStyling: false,
+					confirmButtonClass: "btn btn-success",
+					icon: "error",
+					button: "Vale",
+				}).catch(swal.noop);
+			<?php endif; ?>
 		</script>
 	</body>
 </html>

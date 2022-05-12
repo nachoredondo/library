@@ -10,6 +10,18 @@ $id = $_POST['id'];
 $name = $_POST['name'] ?? 'NULL';
 $description = $_POST['description'] ?? 'NULL';
 
+
+// start control errors
+if (!$name && $form == "Crear"){
+	header('Location: ../../views/category/edit_create.php?success=false&message=Nombre vacío');
+	exit();
+} else if (!$name && $form == "Editar") {
+	header('Location: ../../views/category/edit_create.php?id='.$id.'&success=false&message=Nombre vacío');
+	exit();
+}
+// end control errors
+
+
 try {
 	if ($form == "Crear") {
 		$success = Category::insert($name, $description);

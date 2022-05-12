@@ -16,25 +16,37 @@ $fileName = $_FILES['file']['name'] ?? 'NULL';
 $fileSize = $_FILES['file']['size'] ?? 'NULL';
 $fileType = $_FILES['file']['type'] ?? 'NULL';
 
-if (!$fileName && !$file){
-	header('Location: ../../views/book/edit_create.php?action=err&message=Sin adjuntar imagen');
-	exit();
-}
 
-if (!$title){
+// start control errors
+if (!$title && $form == "Crear"){
 	header('Location: ../../views/book/edit_create.php?action=err&message=Título vacío');
 	exit();
-}
-
-if (!$isbn){
-	header('Location: ../../views/book/edit_create.php?action=err&message=ISBN vacío');
+} else if (!$title && $form == "Editar"){
+	header('Location: ../../views/book/edit_create.php?id='.$id.'action=err&message=Título vacío');
 	exit();
 }
 
+if (!$isbn && $form == "Crear"){
+	header('Location: ../../views/book/edit_create.php?action=err&message=ISBN vacío');
+	exit();
+} else if (!$isbn && $form == "Editar"){
+	header('Location: ../../views/book/edit_create.php?id='.$id.'action=err&message=ISBN vacío');
+	exit();
+}
+
+if (!$fileName && !$file && $form == "Crear"){
+	header('Location: ../../views/book/edit_create.php?action=err&message=Sin adjuntar imagen');
+	exit();
+} else if (!$fileName && !$file && $form == "Editar"){
+	header('Location: ../../views/book/edit_create.php?id='.$id.'action=err&message=Sin adjuntar imagen');
+	exit();
+}
 if ($fileSize > 8000000) {
 	header('Location: ../../views/book/edit_create.php?action=err&message=Tamaño máximo del archivo adjuntado sobrepasado (8 Megabytes)');
 	exit();
 }
+// end control errors
+
 
 $uploadFileDir = '../../files/book/';
 $destPath = $uploadFileDir . $fileName;

@@ -5,12 +5,42 @@ require '../../classes/session.php';
 Session::check_login_redirect();
 $errors = [];
 
-$form = $_POST['form'];
-$id = $_POST['id'];
+$form = $_POST['form'] ?? 'NULL';
+$id = $_POST['id'] ?? 'NULL';
 $name = $_POST['name'] ?? 'NULL';
 $pseudonym = $_POST['pseudonym'] ?? 'NULL';
 $birthdate = $_POST['birthdate'] ?? 'NULL';
 $death_date = $_POST['death_date'] ?? 'NULL';
+
+
+// start control errors
+if (!$name && $form == "Crear"){
+	header('Location: ../../views/author/edit_create.php?success=false&message=Nombre vacío');
+	exit();
+} else if (!$name && $form == "Editar") {
+	// print("punto de control");
+	// exit();
+	header('Location: ../../views/author/edit_create.php?id='.$id.'&success=false&message=Nombre vacío');
+	exit();
+}
+
+if (!$pseudonym && $form == "Crear"){
+	header('Location: ../../views/author/edit_create.php?success=false&message=Pseudónimo vacío');
+	exit();
+} else if (!$pseudonym && $form == "Editar") {
+	header('Location: ../../views/author/edit_create.php?id='.$id.'&success=false&message=Pseudónimo vacío');
+	exit();
+}
+
+if (!$birthdate && $form == "Crear"){
+	header('Location: ../../views/author/edit_create.php?success=false&message=Fecha nacimiento vacía');
+	exit();
+} else if (!$birthdate && $form == "Editar") {
+	header('Location: ../../views/author/edit_create.php?id='.$id.'&success=false&message=Fecha nacimiento vacía');
+	exit();
+}
+// end control errors
+
 
 try {
 	if ($form == "Crear") {

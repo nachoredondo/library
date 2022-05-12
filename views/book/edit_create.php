@@ -54,10 +54,10 @@ $action = $_REQUEST['action'] ?? '';
 									<div class="form-group floating-label-form-group controls mb-0">
 										<div class="row ml-1">
 											<label>Título</label>
-											<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-user"></i>
+											<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-title"></i>
 											<label class="text-danger ml-3">✱</label>
 										</div>
-										<input class="form-control" id="title" name="title" type="text" required="required" value="<?php echo $book->title();?>"data-validation-required-message="Por favor introduce el título." placeholder="Título" />
+										<input class="form-control" id="title" name="title" type="text" required="required" value="<?php echo $book->title();?>" data-validation-required-message="Por favor introduce el título." placeholder="Título" />
 										<p class="help-block text-danger"></p>
 									</div>
 								</div>
@@ -93,7 +93,7 @@ $action = $_REQUEST['action'] ?? '';
 									<div class="form-group floating-label-form-group controls mb-0">
 										<div class="row ml-1">
 											<label>Description</label>
-											<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-user"></i>
+											<i class="d-none d-sm-none d-md-block fas fa-microphone ml-3 mt-4" id="audio-description"></i>
 										</div>
 										<input class="form-control" id="description" name="description" type="text" required="required" value="<?php echo $book->description;?>"data-validation-required-message="Por favor introduce la descripción." placeholder="Descripción" />
 										<p class="help-block text-danger"></p>

@@ -4,8 +4,6 @@ require '../../classes/user.php';
 require '../../classes/category.php';
 
 Session::check_login_redirect();
-$message = $_REQUEST['message'] ?? '';
-
 $action = $_REQUEST['action'] ?? '';
 
 ?>
@@ -140,16 +138,6 @@ $action = $_REQUEST['action'] ?? '';
 					buttonsStyling: false,
 					confirmButtonClass: "btn btn-success",
 					icon: "success",
-					button: "Vale",
-				}).catch(swal.noop);
-			<?php endif; ?>
-
-			<?php if ($message): ?>
-				swal({
-					title: '<?php echo $message; ?>',
-					buttonsStyling: false,
-					confirmButtonClass: "btn btn-success",
-					icon: "error",
 					button: "Vale",
 				}).catch(swal.noop);
 			<?php endif; ?>
