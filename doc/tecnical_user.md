@@ -17,8 +17,8 @@ db_structure.sql has the structure of the library application's database.. The t
 	- user -> to login and user custom app
 
 
-	The following diagram shows the relations for the different tables.
-	![Diagram](../assets/img/diagram.png)
+  The following diagram shows the relations for the different tables.
+  ![Diagram](../assets/img/diagram.PNG)
 
 The files and folder detailed in this section are:
   ```
@@ -106,6 +106,8 @@ Some files used in this section are:
   └── views/main/index.php
   ```
 
+  An example of the catalog is the following
+  ![Diagram](../assets/img/catalog.PNG)
 
 ### Categories
 
